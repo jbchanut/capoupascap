@@ -1,0 +1,17 @@
+.card   {
+    margin-top: 1rem;
+}
+
+.fas, .far  {
+    font-size: 1.5rem;
+}
+
+.fa-heart   {
+    float: left;
+    color: red;
+}
+
+.fa-save    {
+    float: right;
+    color: darkgreen;
+}

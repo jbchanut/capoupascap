@@ -1,0 +1,36 @@
+h1  {
+    position: relative;
+}
+
+ul  {
+    font-size: 20px;
+    color: #FFFFFF;
+    padding: 10px;
+    margin-bottom: 25px;
+    box-shadow: 1px 1px 8px 1px rgb(100, 100,100);
+    border-radius: 50px;
+    background-color: #C0C0C0;
+}
+
+.float-button{
+    position:fixed;
+    width:60px;
+    height: 60px;
+    background: darkblue;
+    color: #FFFFFF;
+    border-radius: 50%;
+    font-size: 30px;
+    right:5px;
+    top:50%;
+    transform: translateY(-50%);
+    box-shadow: 1px 1px 8px 1px rgb(100, 100,100);
+
+}
+
+.float-button i{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+    transform: translateY(-50%) translateX(-50%);
+}

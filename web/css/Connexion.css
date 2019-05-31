@@ -1,0 +1,20 @@
+html, body, .container  {
+    height: 99%;
+    text-align: center;
+}
+
+.dragon  {
+    transform: translateX(-50%);
+}
+
+#lienInscription    {
+    text-align: center;
+    color: black;
+}
+
+#erreurEmailToast   {
+    z-index: 1100;
+    position: absolute;
+    top: 1rem; 
+    right: 1rem;
+}
