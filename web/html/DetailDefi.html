@@ -10,27 +10,19 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="/main.css"/>
     <link rel="stylesheet" href="/Defi.css"/>
-    <title>Ecran des defi</title>
+    <title>Ecrand des defi</title>
 </head>
-<body>  
+<body> 
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom border-primary mb-3">
-        <a class="navbar-brand" href="/logout"><i class="fas fa-sign-in-alt"></i></a>
-        <a class="navbar-brand" href="#"><i class="far fa-plus-square"></i></i></a>
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-ellipsis-v"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button"><i class="fas fa-user"></i> Profil</button>
-            <button class="dropdown-item" type="button"><i class="fas fa-archive"></i> Archives</button>
-            <button class="dropdown-item" type="button" id="filtre">Filtre masqué</button>
-            <button class="dropdown-item" type="button" id="tri">Changer le tri</button>
-        </div>
+        <a class="navbar-brand" href="/Defi.html"><i class="fas fa-chevron-left"></i></a>
+        <a class="navbar-brand" id="like"><i></i></a>
+        <a class="navbar-brand" id="sauvegarde"><i></i></a>
     </nav>
-    
-    <div class="container"> 
-        <div class="row">
-            <div id="tableDefi" class="col-12"></div>
-        </div>           
+
+    <div class="container">
+        <div class="w-100 mw-100 rounded-bottom border border-primary mb-3" style="padding: 1rem">
+            <a id="textDefi"></a>
+        </div>    
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -42,7 +34,6 @@
     <script type="text/javascript" src="servicesDefiSauvegarde.js"></script>
     <script type="text/javascript" src="servicesLike.js"></script>
     <script type="text/javascript" src="servicesDefi.js"></script>
-    <script type="text/javascript" src="defiController.js"></script>
-    <script type="text/javascript" src="defi.js"></script>
+    <script type="text/javascript" src="detailDefi.js"></script>
 </body>
 </html>

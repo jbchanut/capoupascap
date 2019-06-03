@@ -1,3 +1,7 @@
+.container  {
+    margin-top: 3.5rem;
+}
+
 .card   {
     margin-top: 1rem;
 }
@@ -8,10 +12,18 @@
 
 .fa-heart   {
     float: left;
-    color: red;
+    color: red !important;
 }
 
 .fa-save    {
     float: right;
-    color: darkgreen;
+    color: darkgreen !important;
+}
+
+#textDefi   {
+    word-wrap: break-word;
+}
+
+.dropdown-toggle::after {
+    display:none;
 }

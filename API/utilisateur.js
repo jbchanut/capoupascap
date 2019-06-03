@@ -16,8 +16,8 @@ module.exports = (app, dao, auth) => {
         })
     })
 
-    app.get("/utilisateur/:id", (req, res) => {
-        dao.getById(req.params.id, (utilisateur) => {
+    app.get("/utilisateur/connecte", (req, res) => {
+        dao.getById(req.user.id, (utilisateur) => {
             if (utilisateur == null) {
                 res.status(404).type('text/plain').end()
             } else {

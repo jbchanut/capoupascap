@@ -41,7 +41,6 @@ module.exports = class DefiDao  {
             (err, row) => {
                 if (err == null) {
                     let d = Object.assign(new Defi(), row)
-                    d.id = row.id
                     defi.push(d)
                 }
             },
@@ -50,6 +49,16 @@ module.exports = class DefiDao  {
                     done(defi)
                 }
             }
+        )
+    }
+
+    getById(id, done)   {
+        let defi = null
+        this.db.each( "SELECT * FROM defi WHERE id = ?", [id],
+            (err, row) => {
+                if (err == null) defi = Object.assign(new Defi(), row)
+            },
+            () => { done(defi) }
         )
     }
 }

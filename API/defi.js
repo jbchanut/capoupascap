@@ -13,7 +13,7 @@ module.exports = (app, dao, auth) => {
     })
 
     app.get("/defi/:id", (req, res) => {
-        dao.getById(true, (defi) => {
+        dao.getById(req.params.id, (defi) => {
             if (defi == null) {
                 res.status(404).type('text/plain').end()
             } else {

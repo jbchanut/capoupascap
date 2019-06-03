@@ -6,7 +6,7 @@ class DefiController   {
     }
 
 
-    afficheTousLesDefis()   {
+    afficheTousLesDefis(filtre)   {
         document.querySelector("#tableDefi").innerHTML = ""
         this.servicesDefi.getAll((status, list) => {
             if (status === 200) {
@@ -30,11 +30,12 @@ class DefiController   {
                                     defiSauvegarde = res.id
                                 }
                                 let html = `
-                                <div class="w-100 card border-primary mb-3">
-                                    <div class="card-header">Un titre ultra badasse mais je sais pas quoi mettre</div>
-                                    <div class="card-body text-primary">
-                                        <p class="card-text">${ligne.texte}</p>
-                                    </div>
+                                <div class="w-100 card border-primary mb-3">                          
+                                    <a href="DetailDefi.html?defi=${ligne.id}">
+                                        <div class="card-body text-primary>   
+                                            <p class="card-text">${ligne.texte}</p>
+                                        </div>
+                                    </a>
                                     <div class="card-footer">
                                         <div class="row">
                                         <div class="col-12">
