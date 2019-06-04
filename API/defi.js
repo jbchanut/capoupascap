@@ -1,7 +1,7 @@
 module.exports = (app, dao, auth) => {
-
-    app.get("/defi", (req, res) => {
-        dao.getAll(req.user.filtrerealisation, (defi) => {            
+    
+    app.get("/defi/all/:tri", (req, res) => {
+        dao.getAll(req.params.tri, req.user.filtrerealisation, (defi) => {            
             res.json(defi)
         })
     })
@@ -29,6 +29,22 @@ module.exports = (app, dao, auth) => {
             return
         }
         dao.insert(defi, (err) => {
+            if (err == null) {
+                res.status(200).type('text/plain').end()
+            } else {
+                res.status(500).end()
+            }
+        })
+    })
+
+    app.put("/defi/:id", (req, res) => {
+        const defi = req.body;
+        if (defi.utilisateur === undefined || defi.texte === undefined 
+            || defi.masque === undefined || defi.datedecreation === undefined) {
+            res.status(400).type('text/plain').end()
+            return
+        }
+        dao.update(req.params.id, defi, (err) => {
             if (err == null) {
                 res.status(200).type('text/plain').end()
             } else {

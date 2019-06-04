@@ -2,19 +2,12 @@ const defiController = new DefiController()
 const servicesUtilisateur = new ServicesUtilisateur()
 let tri = false
 
-servicesUtilisateur.getUtilisateurConnecte((status, res) => {
-    if(status === 200)  {
-        defiController.afficheTousLesDefis(tri, res.filtrerealisation)
-    }
-})
+
+defiController.afficheTousLesDefis(tri)
 
 document.querySelector("#tri").addEventListener("click", () => {
     tri ? tri = false : tri = true
-    servicesUtilisateur.getUtilisateurConnecte((status, res) => {
-        if(status === 200)  {
-            defiController.afficheTousLesDefis(tri, res.filtrerealisation)
-        }
-    })
+    defiController.afficheTousLesDefis(tri)
 })
 
 document.querySelector("#filtre").addEventListener("click", () => {
@@ -24,7 +17,7 @@ document.querySelector("#filtre").addEventListener("click", () => {
 
             servicesUtilisateur.update(res.id, res, (status) => {
                 if(status === 200)  {
-                    defiController.afficheTousLesDefis(tri, res.filtrerealisation)
+                    defiController.afficheTousLesDefis(tri)
                 }
             })
         }

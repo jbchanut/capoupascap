@@ -12,8 +12,8 @@ module.exports = class CommentaireDao  {
     }
 
     insert(commentaire, done) {
-        const stmt = this.db.prepare("INSERT INTO commentaire(utilisateur, defi, datedecreation) VALUES (?, ?, ?)")
-        stmt.run([commentaire.utilisateur, commentaire.defi, commentaire.datedecreation], done)
+        const stmt = this.db.prepare("INSERT INTO commentaire(utilisateur, defi, preuve, valide, texte, datedecreation) VALUES (?, ?, ?, ?, ?, ?)")
+        stmt.run([commentaire.utilisateur, commentaire.defi, commentaire.preuve, commentaire.valide, commentaire.texte, commentaire.datedecreation], done)
         stmt.finalize()
     }
 
@@ -31,6 +31,35 @@ module.exports = class CommentaireDao  {
                 if (err == null) commentaire = Object.assign(new Commentaire(), row)
             },
             () => { done(personne) }
+        )
+    }
+
+    getByDefiId(id, done) {
+        const commentaire = []
+        this.db.each("SELECT * FROM commentaire WHERE defi=? ORDER BY datedecreation DESC", [id],
+            (err, row) => {
+                if (err == null) {
+                    let c = Object.assign(new Commentaire(), row)
+                    commentaire.push(c)
+                }
+            },
+            (err) => {
+                if (err == null && done) {
+                    done(commentaire)
+                }
+            }
+        )
+    }
+
+    countNombreCommentaire(defiId, done) {
+        let nombreCommentaire = 0
+        this.db.each( "SELECT count(*) as nb FROM commentaire WHERE defi = ?", [defiId],
+            (err, row) => {
+                if (err == null) {
+                    nombreCommentaire = row.nb
+                }
+            },
+            () => { done(nombreCommentaire) }
         )
     }
 }

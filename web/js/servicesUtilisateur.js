@@ -7,7 +7,7 @@ class ServicesUtilisateur extends Service   {
         ajax("GET", this.serviceUrl + "/email/" + email, done)
     }
 
-    getUtilisateurConnecte()    {
-        ajax("GET", this.serviceUrl + "/connect", done)
+    getUtilisateurConnecte(done)    {
+        ajax("GET", this.serviceUrl + "/connecte", done)
     }
 }

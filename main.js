@@ -7,8 +7,6 @@ const CommentaireDAO = require("./model/commentaireDao")
 const Commentaire = require("./model/commentaire")
 const DefiDAO = require("./model/defiDao")
 const Defi = require("./model/defi")
-const DefiRealiseDAO = require("./model/defiRealiseDao")
-const DefiRealise = require("./model/defiRealise")
 const DefiSauvegardeDAO = require("./model/defiSauvegardeDao")
 const DefiSauvegarde = require("./model/defiSauvegarde")
 const express = require("express")
@@ -24,10 +22,9 @@ const utilisateurdao = new UtilisateurDAO(db)
 const likedao = new LikeDAO(db)
 const commentairedao = new CommentaireDAO(db)
 const defidao = new DefiDAO(db)
-const defirealisedao = new DefiRealiseDAO(db)
 const defisauvegardedao = new DefiSauvegardeDAO(db)
 
-require('./model/seeder')(utilisateurdao, likedao, commentairedao, defidao, defirealisedao, defisauvegardedao, () =>{
+require('./model/seeder')(utilisateurdao, likedao, commentairedao, defidao, defisauvegardedao, () =>{
     
 })
 
@@ -46,7 +43,6 @@ require('./api/utilisateur')(app, utilisateurdao, auth)
 require('./api/like')(app, likedao, auth)
 require('./api/commentaire')(app, commentairedao, auth)
 require('./api/defi')(app, defidao, auth)
-require('./api/defiRealise')(app, defirealisedao, auth)
 require('./api/defiSauvegarde')(app, defisauvegardedao, auth)
 require('./routes')(app, passport, auth)
 

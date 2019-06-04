@@ -11,10 +11,13 @@ class Utilisateur  {
 }
 
 class Commentaire  {
-    constructor(utilisateur, defi)   {
+    constructor(defi, texte)   {
         this.id = null
-        this.utilisateur = utilisateur
+        this.utilisateur = null
         this.defi = defi
+        this.preuve = false
+        this.valide = false
+        this.texte = texte
         this.datedecreation = new Date()
     }
 }
@@ -34,16 +37,6 @@ class Defi  {
         this.texte = texte
         this.masque = false
         this.datedecreation = new Date()
-    }
-}
-
-class DefiRealise  {
-    constructor(utilisateur, defi, preuve)   {
-        this.id = null
-        this.utilisateur = utilisateur
-        this.defi = defi
-        this.preuve = preuve
-        this.valide = false
     }
 }
 

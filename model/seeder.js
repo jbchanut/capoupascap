@@ -2,10 +2,9 @@ const Utilisateur = require('./utilisateur')
 const Commentaire = require('./commentaire')
 const Like = require('./like')
 const Defi = require('./defi')
-const DefiRealise = require('./defiRealise')
 const DefiSauvegarde = require('./defiSauvegarde')
 
-module.exports = (utilisateurdao, commentairedao, likedao, defidao, defirealisedao, defisauvegardedao, done) => {
+module.exports = (utilisateurdao, commentairedao, likedao, defidao, defisauvegardedao, done) => {
     utilisateurdao.db.run("CREATE TABLE utilisateur (id INTEGER PRIMARY KEY AUTOINCREMENT," +
         " nom TEXT, prenom TEXT, email TEXT UNIQUE, motdepasse TEXT, filtrerealisation BOOLEAN, datedecreation INTEGER)",
         (err) => {            
@@ -21,7 +20,7 @@ module.exports = (utilisateurdao, commentairedao, likedao, defidao, defirealised
         })
 
     commentairedao.db.run("CREATE TABLE commentaire (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-        " utilisateur INTEGER, defi INTEGER, datedecreation INTEGER)",
+        " utilisateur INTEGER, defi INTEGER, preuve INTEGER, valide BOOLEAN, texte TEXT, datedecreation INTEGER)",
         (err) => {
         })
         
@@ -43,11 +42,6 @@ module.exports = (utilisateurdao, commentairedao, likedao, defidao, defirealised
                     done()
                 })
             }
-        })
-        
-    defirealisedao.db.run("CREATE TABLE defiRealise (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-        " utilisateur INTEGER, defi INTEGER, preuve INTEGER, valide BOOLEAN)",
-        (err) => {
         })
     
     defisauvegardedao.db.run("CREATE TABLE defiSauvegarde (id INTEGER PRIMARY KEY AUTOINCREMENT," +
