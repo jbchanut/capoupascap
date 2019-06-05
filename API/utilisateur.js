@@ -6,6 +6,10 @@ module.exports = (app, dao, auth) => {
         })
     })*/
 
+    app.get("/utilisateur/compare/:mdp", (req, res) => {
+        res.jsonp(dao.compareMdp(req.params.mdp, req.user.motdepasse))
+    })
+
     app.get("/utilisateur/email/:email", (req, res) => {
         dao.getByEmail(req.params.email, (utilisateur) => {
             if (utilisateur == null) {
@@ -58,6 +62,9 @@ module.exports = (app, dao, auth) => {
             || utilisateur.motdepasse === undefined || utilisateur.datedecreation === undefined) {
             res.status(400).type('text/plain').end()
             return
+        }
+        if(utilisateur.motdepasse !== req.user.motdepasse)  {
+            utilisateur.motdepasse = dao.hashMdp(utilisateur.motdepasse)
         }
         dao.update(req.params.id, utilisateur, (err) => {
             if (err == null) {

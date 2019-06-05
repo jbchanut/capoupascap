@@ -31,9 +31,9 @@ class Like  {
 }
 
 class Defi  {
-    constructor(utilisateur, texte)   {
+    constructor(texte)   {
         this.id = null
-        this.utilisateur = utilisateur
+        this.utilisateur = null
         this.texte = texte
         this.masque = false
         this.datedecreation = new Date()

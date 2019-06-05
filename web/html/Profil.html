@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css"/>
+    <link rel="stylesheet" href="/Defi.css"/>
+    <title>Profil</title>
+</head>
+<body>  
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom border-primary mb-3">
+        <a class="navbar-brand" href="/Defi.html"><i class="fas fa-chevron-left"></i></a>
+    </nav>
+    
+    <div class="container"> 
+        <div class="row">
+            <div class="col-12 border border-secondary">
+                <div class="input-group mb-3" style="margin-top: 1rem">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    </div>
+                    <input id="nomInput" type="text" class="form-control" placeholder="nom" aria-label="nom" autofocus>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input id="prenomInput" type="text" class="form-control" placeholder="prenom" aria-label="prenom">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-at"></i></span>
+                    </div>
+                    <input id="emailInput" type="text" class="form-control" placeholder="email" aria-label="email">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                    </div>
+                    <input id="mdpInput" type="text" class="form-control" placeholder="mot de passe" aria-label="mot de passe">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                    <button type="button" data-toggle="modal" data-target="#modalModification" class="btn btn-outline-primary btn-lg btn-block">Confirm</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="tableDefi" class="col-12"></div>
+        </div>           
+    </div>
+    
+    <div data-delay="3000" id="toast" class="toast">
+        <div class="toast-body">
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modalModification">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>Entrez votre mot de passe pour sauvegarder les modifications.</p>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                <input id="mdpModalInput" type="text" class="form-control" placeholder="mot de passe" aria-label="mot de passe" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              <button type="button" class="btn btn-primary" id="modalModificationBtn">Modifier</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="tools.js"></script>
+    <script type="text/javascript" src="model.js"></script>
+    <script type="text/javascript" src="services.js"></script>
+    <script type="text/javascript" src="servicesDefiSauvegarde.js"></script>
+    <script type="text/javascript" src="servicesLike.js"></script>
+    <script type="text/javascript" src="servicesUtilisateur.js"></script>
+    <script type="text/javascript" src="servicesDefi.js"></script>
+    <script type="text/javascript" src="defiController.js"></script>
+    <script type="text/javascript" src="profil.js"></script>
+</body>
+</html>

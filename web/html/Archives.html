@@ -10,36 +10,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="/main.css"/>
     <link rel="stylesheet" href="/Defi.css"/>
-    <title>Ecran des defi</title>
+    <title>Archives</title>
 </head>
 <body>  
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom border-primary mb-3">
-        <a class="navbar-brand" href="/logout"><i class="fas fa-sign-in-alt"></i></a>
-        <a class="navbar-brand" href="/Archives.html"><i class="fas fa-archive"></i></a>
-        <a class="navbar-brand" href="/Profil.html"><i class="fas fa-user"></i></a>
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-ellipsis-v"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" id="filtre">Filtre masqué</a>
-            <a class="dropdown-item" id="tri">Changer le tri</a>
-        </div>
+        <a class="navbar-brand" href="/Defi.html"><i class="fas fa-chevron-left"></i></a>
     </nav>
     
     <div class="container"> 
-        <div class="row">
-            <div class="col-12 border border-secondary">
-                <div style="width: 95%; height: 95%; margin: 2.5%">
-                    <p>Creer votre propre défi !!</p>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control" aria-label="With textarea" maxlength="140" id="nouveauDefi"></textarea>               
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="nouveauDefiBtn">Ajout du<br/>défi</button>
-                        </div>
-                    </div>   
-                </div>  
-            </div>
-        </div>
         <div class="row">
             <div id="tableDefi" class="col-12"></div>
         </div>           
@@ -61,6 +39,6 @@
     <script type="text/javascript" src="servicesUtilisateur.js"></script>
     <script type="text/javascript" src="servicesDefi.js"></script>
     <script type="text/javascript" src="defiController.js"></script>
-    <script type="text/javascript" src="defi.js"></script>
+    <script type="text/javascript" src="archives.js"></script>
 </body>
 </html>

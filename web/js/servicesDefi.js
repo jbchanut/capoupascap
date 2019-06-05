@@ -10,4 +10,12 @@ class ServicesDefi extends Service   {
     getAll(tri, done) {
         ajax("GET", this.serviceUrl + "/all/" + tri, done)
     }
+
+    getAllArchives(done) {
+        ajax("GET", this.serviceUrl + "/allArchives", done)
+    }
+
+    getDefiUtilisateur(done) {
+        ajax("GET", this.serviceUrl + "/allUtilisateur", done)
+    }
 }

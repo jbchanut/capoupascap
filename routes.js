@@ -15,7 +15,7 @@ module.exports = (app, passport, auth) => {
 
     app.post('/authenticate', passport.authenticate('local-login', {
         successRedirect: 'Defi.html',
-        failureRedirect: '/'
+        failureRedirect: '/Connexion.html?raté'
     }))
 
     app.get(['/welcome', '*.html'], auth.isLoggedInWeb, (req, res) => {

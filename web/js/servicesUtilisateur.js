@@ -9,5 +9,9 @@ class ServicesUtilisateur extends Service   {
 
     getUtilisateurConnecte(done)    {
         ajax("GET", this.serviceUrl + "/connecte", done)
+    }    
+
+    compareMdp(mdp, done)    {
+        ajax("GET", this.serviceUrl + "/compare/" + mdp, done)
     }
 }

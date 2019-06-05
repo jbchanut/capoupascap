@@ -6,6 +6,8 @@ const servicesUtilisateur = new ServicesUtilisateur()
 const commentaireController = new CommentaireController()
 const parameters = location.search.substring(1).split("=")
 
+console.log(location)
+
 if(parameters[0] === "defi")  {
     servicesDefi.get(parameters[1], (status, defi) => {
         if(status === 200)  {
@@ -13,14 +15,16 @@ if(parameters[0] === "defi")  {
             servicesUtilisateur.getUtilisateurConnecte((status, utilisateur) => {
                 if(status === 200)  {
                     const masque = document.querySelector("#masque")
+                    const supprimer = document.querySelector("#supprimer")
                     if(defi.utilisateur === utilisateur.id) {
                         if(defi.masque)  {
                             masque.childNodes[0].style.color = 'violet'
                         }   else    {
                             masque.childNodes[0].style.color = 'green'
-                        }
+                        }                        
                     }   else    {
                         masque.parentNode.removeChild(masque)
+                        supprimer.parentNode.removeChild(supprimer)
                     }                    
                 }
             })            
@@ -54,7 +58,8 @@ if(parameters[0] === "defi")  {
 }
 
 document.querySelector("#commentaireBtn").addEventListener("click", () => {
-    if(document.querySelector("#commentaire").value !== "")   {
+    if(document.querySelector("#commentaire").value !== "" &&
+        document.querySelector("#commentaire").textLength <= 140)   {
         servicesCommentaire.insert(new Commentaire(parameters[1], document.querySelector("#commentaire").value),
         (status) => {
             if(status === 200)  {
@@ -63,7 +68,7 @@ document.querySelector("#commentaireBtn").addEventListener("click", () => {
             }
         })
     }   else    {
-        document.querySelector("#toast").childNodes[0].innerHTML = 
+        document.querySelector("#toast").childNodes[1].innerHTML = 
         "Vous ne pouvvez pas faire de commentaire vide."
         $("#toast").toast('show')
     }
@@ -112,39 +117,62 @@ document.querySelector("#sauvegarde").addEventListener("click", () => {
 })
 
 document.querySelector("#masque").addEventListener("click", () => {
+    servicesCommentaire.getNombreCommentaire(parameters[1], (status, nbCommmentaire) => {
+        if(status === 200)  {
+            if(nbCommmentaire > 0) {                 
+                document.querySelector("#toast").childNodes[1].innerHTML = 
+                "Vous ne pouvez pas masquer un defi ayant des commentaires."
+                $("#toast").toast('show')
+            }   else    {
+                servicesDefi.get(parameters[1], (status, defi) => {
+                    if(status === 200)  {
+                        defi.masque ? defi.masque = false : defi.masque = true
+                        servicesDefi.update(defi.id, defi, (status) => {
+                            if(status === 200)  {
+                                if(defi.masque) {
+                                    document.querySelector("#masque").
+                                    childNodes[0].style.color = 'violet'     
+                                    document.querySelector("#toast").childNodes[1].innerHTML = "Le defi est maintenant masqué."
+                                    $("#toast").toast('show')
+                                }   else    {
+                                    document.querySelector("#masque").
+                                    childNodes[0].style.color = 'green'            
+                                    document.querySelector("#toast").childNodes[1].innerHTML =                             
+                                    "Le defi n'est plus masqué."
+                                    $("#toast").toast('show')
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+            
+        }
+    })
+})
+
+document.querySelector("#modalSupprimerBtn").addEventListener("click", () => {
     servicesLike.getNombreLike(parameters[1], (status, nbLike) => {
         if(status === 200)  {
             servicesCommentaire.getNombreCommentaire(parameters[1], (status, nbCommmentaire) => {
                 if(status === 200)  {
                     if(nbLike > 0 || nbCommmentaire > 0) { 
-                        document.querySelector("#toast").childNodes[0].innerHTML = 
-                        "Vous ne pouvvez pas masquer un defi ayant des like ou commentaires."
+                        $("#modalSupprimer").modal('hide')
+                        document.querySelector("#toast").childNodes[1].innerHTML = 
+                        "Vous ne pouvez pas supprimer un defi ayant des like ou commentaires."
                         $("#toast").toast('show')
                     }   else    {
                         servicesDefi.get(parameters[1], (status, defi) => {
                             if(status === 200)  {
-                                defi.masque ? defi.masque = false : defi.masque = true
-                                servicesDefi.update(defi.id, defi, (status) => {
-                                    if(status === 200)  {
-                                        if(defi.masque) {
-                                            document.querySelector("#masque").
-                                            childNodes[0].style.color = 'violet'     
-                                            document.querySelector("#toast").childNodes[0].innerHTML =                                        
-                                            "Le defi est maintenant masqué."
-                                            $("#toast").toast('show')
-                                        }   else    {
-                                            document.querySelector("#masque").
-                                            childNodes[0].style.color = 'green'            
-                                            document.querySelector("#toast").childNodes[0].innerHTML =                             
-                                            "Le defi n'est plus masqué."
-                                            $("#toast").toast('show')
-                                        }
+                                servicesDefi.delete(defi.id, (status) => {
+                                    if(status === 200)  {    
+                                        location.pathname = "/Defi.html"                                        
                                     }
                                 })
                             }
                         })
                     }
-                   
+                    
                 }
             })
         }

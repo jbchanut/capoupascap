@@ -8,8 +8,8 @@ module.exports = class UtilisateurDao  {
 
     update(id, utilisateur, done)    {
         const stmt = this.db.prepare( "UPDATE utilisateur SET nom=?, prenom=?, email=?, motdepasse=?, filtrerealisation=? WHERE id=?" )
-        stmt.run(utilisateur.nom, utilisateur.prenom, utilisateur.email, this.hashMdp(utilisateur.motdepasse), utilisateur.filtrerealisation, utilisateur.datedecreation, id, done)
-        stmt.finalize()
+            stmt.run(utilisateur.nom, utilisateur.prenom, utilisateur.email, utilisateur.motdepasse, utilisateur.filtrerealisation, id, done)                       
+            stmt.finalize()  
     }
 
     insert(utilisateur, done) {

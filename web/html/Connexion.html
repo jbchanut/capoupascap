@@ -68,7 +68,7 @@
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">@</span>
+                    <span class="input-group-text"><i class="fas fa-at"></i></span>
                 </div>
                 <input id="emailModalInput" type="text" class="form-control" placeholder="email" aria-label="email" required>
             </div>
@@ -81,22 +81,14 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline-primary btn-lg btn-block" id="saveModalBtn">Save changes</button>
+          <button type="button" class="btn btn-outline-primary btn-lg btn-block" type="submit" id="saveModalBtn">Save changes</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="erreurEmailToast" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
-    <div class="toast-header">
-      <img src="..." class="rounded mr-2" alt="...">
-      <strong class="mr-auto">Erreur</strong>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+  <div data-delay="3000" id="toast" class="toast">
     <div class="toast-body">
-        L'adresse entrée est déja prise.
     </div>
   </div>
 

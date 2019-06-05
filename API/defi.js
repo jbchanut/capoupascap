@@ -1,7 +1,19 @@
 module.exports = (app, dao, auth) => {
     
     app.get("/defi/all/:tri", (req, res) => {
-        dao.getAll(req.params.tri, req.user.filtrerealisation, (defi) => {            
+        dao.getAll(req.params.tri, req.user, (defi) => {            
+            res.json(defi)
+        })
+    })
+    
+    app.get("/defi/allArchives", (req, res) => {
+        dao.getArchives(req.user.id, (defi) => {            
+            res.json(defi)
+        })
+    })
+    
+    app.get("/defi/allUtilisateur", (req, res) => {
+        dao.getAllUtilisateur(req.user.id, (defi) => {            
             res.json(defi)
         })
     })
@@ -24,6 +36,7 @@ module.exports = (app, dao, auth) => {
 
     app.post("/defi", (req, res) => {
         const defi = req.body
+        defi.utilisateur = req.user.id
         if (defi.texte === undefined || defi.utilisateur === undefined || defi.datedecreation === undefined) {
             res.status(400).end()
             return
