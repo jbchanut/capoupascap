@@ -19,10 +19,15 @@ document.querySelector('#saveModalBtn').addEventListener('click', () => {
                 servicesUtilisateur.insert(new Utilisateur(
                     nomModalInput.value, prenomModalInput.value, emailModalInput.value, mdpModalInput.value)
                 , () => {
-                    nomModalInput.value = ""
-                    prenomModalInput.value = ""
-                    emailModalInput.value = ""
-                    mdpModalInput.value = ""
+                    if(nomModalInput.value !== "")
+                        nomModalInput.value = ""
+                    if(prenomModalInput.value !== "")
+                        prenomModalInput.value = ""
+                    if(emailModalInput.value !== "")
+                        emailModalInput.value = ""
+                    if(mdpModalInput.value !== "")
+                        mdpModalInput.value = ""
+
                     document.querySelector("#toast").childNodes[1].innerHTML = 
                     "Votre compte a bien été créé."
                     $("#toast").toast('show') 

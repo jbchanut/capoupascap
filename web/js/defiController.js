@@ -28,8 +28,18 @@ class DefiController   {
         })
     }
 
-    afficheDefisUtilisateur()   {
-        this.servicesDefi.getDefiUtilisateur((status, list) => {
+    afficheDefisProfil()   {
+        this.servicesDefi.getDefisProfil((status, list) => {
+            if (status === 200) {
+                this.affichageDesCartes(list)
+            } else {
+                console.log(status)
+            }
+        })
+    }
+
+    afficheDefisUtilisateur(id) {
+        this.servicesDefi.getDefisUtilisateur(id, (status, list) => {
             if (status === 200) {
                 this.affichageDesCartes(list)
             } else {
@@ -42,7 +52,9 @@ class DefiController   {
         document.querySelector("#tableDefi").innerHTML = ""   
         let utilisateur = null
         this.servicesUtilisateur.getUtilisateurConnecte((status, res) => {
-            utilisateur = res
+            if(status === 200)  {
+                utilisateur = res
+            }
         })
         list.forEach((ligne) => {
             let like = null

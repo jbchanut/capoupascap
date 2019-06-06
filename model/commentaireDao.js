@@ -6,14 +6,16 @@ module.exports = class CommentaireDao  {
     }
 
     update(id, commentaire, done)    {
-        const stmt = this.db.prepare( "UPDATE commentaire SET utilisateur=?, defi=?, datedecreation=? WHERE id=?" )
-        stmt.run(commentaire.utilisateur, commentaire.defi, commentaire.datedecreation, id, done)
+        const stmt = this.db.prepare( "UPDATE commentaire SET utilisateur=?, defi=?, typepreuve=?, preuve=?, valide=?, texte=?, datedecreation=? WHERE id=?" )
+        stmt.run(commentaire.utilisateur, commentaire.defi, commentaire.typepreuve, commentaire.preuve, 
+            commentaire.valide, commentaire.texte, commentaire.datedecreation, id, done)
         stmt.finalize()
     }
 
     insert(commentaire, done) {
-        const stmt = this.db.prepare("INSERT INTO commentaire(utilisateur, defi, preuve, valide, texte, datedecreation) VALUES (?, ?, ?, ?, ?, ?)")
-        stmt.run([commentaire.utilisateur, commentaire.defi, commentaire.preuve, commentaire.valide, commentaire.texte, commentaire.datedecreation], done)
+        const stmt = this.db.prepare("INSERT INTO commentaire(utilisateur, defi, typepreuve, preuve, valide, texte, datedecreation) VALUES (?, ?, ?, ?, ?, ?, ?)")
+        stmt.run([commentaire.utilisateur, commentaire.defi, commentaire.typepreuve, commentaire.preuve, 
+            commentaire.valide, commentaire.texte, commentaire.datedecreation], done)
         stmt.finalize()
     }
 

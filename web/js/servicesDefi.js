@@ -15,7 +15,11 @@ class ServicesDefi extends Service   {
         ajax("GET", this.serviceUrl + "/allArchives", done)
     }
 
-    getDefiUtilisateur(done) {
-        ajax("GET", this.serviceUrl + "/allUtilisateur", done)
+    getDefisProfil(done) {
+        ajax("GET", this.serviceUrl + "/allProfil", done)
+    }
+
+    getDefisUtilisateur(id, done) {
+        ajax("GET", this.serviceUrl + "/allUtilisateur/" + id, done)
     }
 }

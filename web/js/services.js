@@ -11,6 +11,7 @@ class Service {
         ajax("DELETE", this.serviceUrl + "/" + id, done)
     }
     insert(objet, done) {
+        console.log(objet)
         ajax("POST", this.serviceUrl, done, objet)
     }
     get(id, done) {

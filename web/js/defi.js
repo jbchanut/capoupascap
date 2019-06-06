@@ -30,7 +30,8 @@ document.querySelector("#nouveauDefiBtn").addEventListener("click", () => {
         document.querySelector("#nouveauDefi").textLength <= 140) {
         servicesDefi.insert(new Defi(document.querySelector("#nouveauDefi").value), (status, res) => {
             if(status === 200)  {
-                document.querySelector("#nouveauDefi").value = ""
+                if(document.querySelector("#nouveauDefi").value !== "")
+                    document.querySelector("#nouveauDefi").value = ""
                 defiController.afficheTousLesDefis(tri)
                 document.querySelector("#toast").childNodes[1].innerHTML = 
                 "Felicitations, vous etes l'instigateur d'un nouveau défi."

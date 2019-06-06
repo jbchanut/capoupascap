@@ -12,8 +12,14 @@ module.exports = (app, dao, auth) => {
         })
     })
     
-    app.get("/defi/allUtilisateur", (req, res) => {
+    app.get("/defi/allProfil", (req, res) => {
         dao.getAllUtilisateur(req.user.id, (defi) => {            
+            res.json(defi)
+        })
+    })
+    
+    app.get("/defi/allUtilisateur/:id", (req, res) => {
+        dao.getAllUtilisateur(req.params.id, (defi) => {            
             res.json(defi)
         })
     })

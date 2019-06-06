@@ -11,11 +11,12 @@ class Utilisateur  {
 }
 
 class Commentaire  {
-    constructor(defi, texte)   {
+    constructor(defi, preuve, texte)   {
         this.id = null
         this.utilisateur = null
         this.defi = defi
-        this.preuve = false
+        this.typepreuve = null
+        this.preuve = preuve
         this.valide = false
         this.texte = texte
         this.datedecreation = new Date()

@@ -5,12 +5,17 @@ const servicesCommentaire = new ServicesCommentaire()
 const servicesUtilisateur = new ServicesUtilisateur()
 const commentaireController = new CommentaireController()
 const parameters = location.search.substring(1).split("=")
-
-console.log(location)
+let nbLike = 0
 
 if(parameters[0] === "defi")  {
     servicesDefi.get(parameters[1], (status, defi) => {
         if(status === 200)  {
+            servicesUtilisateur.get(defi.utilisateur, (status, res) => {
+                if(status === 200)  {
+                    document.querySelector("#nomAuteur").innerHTML = res.nom + " " + res.prenom   
+                    document.querySelector("#nomAuteur").href = "/Profil.html?id=" + res.id   
+                }         
+            }) 
             document.querySelector("#textDefi").innerHTML = defi.texte
             servicesUtilisateur.getUtilisateurConnecte((status, utilisateur) => {
                 if(status === 200)  {
@@ -37,11 +42,12 @@ if(parameters[0] === "defi")  {
         }   else    {
             document.querySelector("#like").childNodes[0].className = 'far fa-heart'
         }
-    })
-    servicesLike.getNombreLike(parameters[1], (status, nbLike) => {
-        if(status === 200)  {
-            document.querySelector("#like").childNodes[1].innerHTML = nbLike
-        }
+        servicesLike.getNombreLike(parameters[1], (status, res) => {
+            if(status === 200)  {
+                nbLike += res
+                document.querySelector("#like").childNodes[1].innerHTML = nbLike
+            }
+        })
     })
     
     servicesDefiSauvegarde.getDefiSauvegarde(parameters[1], (status) => {
@@ -51,19 +57,22 @@ if(parameters[0] === "defi")  {
             document.querySelector("#sauvegarde").childNodes[0].className = 'far fa-save'
         }
     })
-
-    commentaireController.getCommentaire(parameters[1])
 }   else    {
     location.pathname = "/Defi.html"
 }
 
+commentaireController.getCommentaire(parameters[1])
+
 document.querySelector("#commentaireBtn").addEventListener("click", () => {
     if(document.querySelector("#commentaire").value !== "" &&
         document.querySelector("#commentaire").textLength <= 140)   {
-        servicesCommentaire.insert(new Commentaire(parameters[1], document.querySelector("#commentaire").value),
+            console.log(document.querySelector("#insertPreuveInput").files)
+        servicesCommentaire.insert(new Commentaire(parameters[1], 
+            document.querySelector("#insertPreuveInput").files, document.querySelector("#commentaire").value),
         (status) => {
             if(status === 200)  {
-                document.querySelector("#commentaire").value = ""
+                if(document.querySelector("#commentaire").value !== "")
+                    document.querySelector("#commentaire").value = ""
                 commentaireController.getCommentaire(parameters[1])
             }
         })
@@ -76,25 +85,26 @@ document.querySelector("#commentaireBtn").addEventListener("click", () => {
 
 document.querySelector("#like").addEventListener("click", () => {
     servicesLike.getLike(parameters[1], (status, res) => {
+        console.log(nbLike)
         if(status === 200)  {
             servicesLike.delete(res.id, (status) => {
                 if(status === 200)  {
+                    console.log("delete")
+                    nbLike = nbLike - 1
                     document.querySelector("#like").childNodes[0].className = 'far fa-heart'
                 }
             })            
         }   else    {
             servicesLike.insert(new Like(parameters[1]), (status) => {
                 if(status === 200)  {
+                    console.log("insert")
+                    nbLike = nbLike + 1
                     document.querySelector("#like").childNodes[0].className = 'fas fa-heart'
                 }
             })            
-        }        
-        servicesLike.getNombreLike(parameters[1], (status, nbLike) => {
-            console.log(nbLike)
-            if(status === 200)  {
-                document.querySelector("#like").childNodes[1].innerHTML = nbLike
-            }
-        })
+        }       
+        console.log(nbLike)
+        document.querySelector("#like").childNodes[1].innerHTML = nbLike
     })
 })
 

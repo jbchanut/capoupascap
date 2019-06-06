@@ -10,6 +10,7 @@ const Defi = require("./model/defi")
 const DefiSauvegardeDAO = require("./model/defiSauvegardeDao")
 const DefiSauvegarde = require("./model/defiSauvegarde")
 const express = require("express")
+const fileUpload = require("express-fileupload")
 const bodyParser = require("body-parser")
 const morgan = require("morgan")
 
@@ -31,8 +32,9 @@ require('./model/seeder')(utilisateurdao, likedao, commentairedao, defidao, defi
 const app = express()
 app.use(cookieParser()) // read cookies (obligatoire pour l'authentification)
 app.use(cookieSession({keys: ['exemplecourssecretkey']}));
-app.use(bodyParser.urlencoded({ extended: false })) // pour les 'form' HTML
+app.use(bodyParser.urlencoded({ extended: true })) // pour les 'form' HTML
 app.use(bodyParser.json())
+app.use(fileUpload())
 app.use(morgan('dev')); // toute les requêtes HTTP dans le log du serveur
 
 app.use(passport.initialize())

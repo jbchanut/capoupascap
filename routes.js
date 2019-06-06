@@ -4,6 +4,7 @@ module.exports = (app, passport, auth) => {
     const css = web + 'css/'
     const html = web + 'html/'
     const js = web + 'js/'
+    const media = web + 'media/'
 
     app.get(['/', 'login'], (req, res) => {
         if (req.originalUrl === '/') {
@@ -39,4 +40,7 @@ module.exports = (app, passport, auth) => {
         res.sendFile(js + req.path)
     })
 
+    app.get('*.*', (req, res) => {
+        res.sendFile(media + req.path)
+    })
 }

@@ -20,7 +20,7 @@ module.exports = (utilisateurdao, commentairedao, likedao, defidao, defisauvegar
         })
 
     commentairedao.db.run("CREATE TABLE commentaire (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-        " utilisateur INTEGER, defi INTEGER, preuve INTEGER, valide BOOLEAN, texte TEXT, datedecreation INTEGER)",
+        " utilisateur INTEGER, defi INTEGER, typepreuve TEXT, preuve TEXT, valide BOOLEAN, texte TEXT, datedecreation INTEGER)",
         (err) => {
         })
         

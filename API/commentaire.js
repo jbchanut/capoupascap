@@ -25,18 +25,42 @@ module.exports = (app, dao, auth) => {
     app.post("/commentaire", (req, res) => {
         let commentaire = req.body
         commentaire.utilisateur = req.user.id
+
         if (commentaire.utilisateur === undefined || commentaire.defi === undefined || 
             commentaire.texte === undefined || commentaire.datedecreation === undefined) {
             res.status(400).end()
             return
-        }
-        dao.insert(commentaire, (err) => {
-            if (err == null) {
-                res.status(200).type('text/plain').end()
-            } else {
-                res.status(500).end()
-            }
-        })
+        }   else    {
+            if(false)    {
+                let preuve = req.files.preuve
+                let path = `../web/media/${preuve.md5}.${preuve.mimetype.split('/')[1]}`
+                commentaire.typepreuve = preuve.mimetype.split('/')[0]
+                commentaire.preuve = `${preuve.md5}.${preuve.mimetype.split('/')[1]}`
+                preuve.mv(path, (erreur) => {
+                    if(erreur)  {
+                        console.log(erreur)
+                        res.status(500).end()
+                    }   else    {
+                        dao.insert(commentaire, (err) => {
+                            if (err == null) {
+                                res.status(200).type('text/plain').end()
+                            } else {
+                                res.status(500).end()
+                            }
+                        })
+                    }
+                })
+            }   else    {
+                commentaire.preuve = null
+                dao.insert(commentaire, (err) => {
+                    if (err == null) {
+                        res.status(200).type('text/plain').end()
+                    } else {
+                        res.status(500).end()
+                    }
+                })
+            }      
+        }          
     })
 
     app.delete("/commentaire/:id", (req, res) => {

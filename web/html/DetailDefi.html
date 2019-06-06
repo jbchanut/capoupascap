@@ -24,12 +24,22 @@
 
     <div class="container">
         <div class="w-100 mw-100 rounded-bottom border border-primary mb-3" style="padding: 1rem">
-            <a id="textDefi"></a>
+            <a id="nomAuteur" style="font-size: 1.5rem;"></a>
+            <br/><br/>
+            <a id="textDefi" style="margin-top: 2rem"></a>
         </div>
         <div class="row"> 
             <div class="col-12 border border-warning mb-3">
                 <div style="width: 95%; height: 95%; margin: 2.5%">
-                    <p>Ajout de preuve</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="insertPreuveInput" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
                     <div class="input-group mb-3">
                         <textarea class="form-control" aria-label="With textarea" maxlength="140" id="commentaire"></textarea>               
                         <div class="input-group-append">
@@ -46,6 +56,37 @@
     
     <div data-delay="3000" id="toast" class="toast">
         <div class="toast-body">
+        </div>
+    </div>
+
+    <div class="modal fade" id="editCommentaire" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modification de commentaire</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="updatePreuveInput" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" aria-label="With textarea" maxlength="140" id="commentaireEdit"></textarea>               
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="commentaireBtn">Ajout du<br/>Commentaire</button>
+                        </div>
+                    </div>                       
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary">Sauvegarder</button>
+                </div>
+            </div>
         </div>
     </div>
 

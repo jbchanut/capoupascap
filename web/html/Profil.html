@@ -15,10 +15,11 @@
 <body>  
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom border-primary mb-3">
         <a class="navbar-brand" href="/Defi.html"><i class="fas fa-chevron-left"></i></a>
+        <a class="navbar-brand" id="titre"></a>
     </nav>
     
     <div class="container"> 
-        <div class="row">
+        <div class="row" id="infoProfil">
             <div class="col-12 border border-secondary">
                 <div class="input-group mb-3" style="margin-top: 1rem">
                     <div class="input-group-prepend">
@@ -42,7 +43,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input id="mdpInput" type="text" class="form-control" placeholder="mot de passe" aria-label="mot de passe">
+                    <input id="mdpInput"  type="password" class="form-control" placeholder="mot de passe" aria-label="mot de passe">
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
@@ -70,7 +71,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input id="mdpModalInput" type="text" class="form-control" placeholder="mot de passe" aria-label="mot de passe" required>
+                <input id="mdpModalInput" type="password" class="form-control" placeholder="mot de passe" aria-label="mot de passe" required>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

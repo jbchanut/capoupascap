@@ -25,12 +25,14 @@ module.exports = class DefiDao  {
 
     getAll(tri, utilisateur, done) {
         const defi = []
+        console.log(utilisateur.filtrerealisation)
+        console.log(tri)
         if(utilisateur.filtrerealisation)   {
             this.db.each(
-                tri ? "SELECT * FROM defi WHERE masque=0 ORDER BY datedecreation DESC;" + 
-                      "SELECT * FROM defi d WHERE d.masque=1 AND (d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like WHERE l.utilisateur=?)) ORDER BY datedecreation DESC; "
-                    : "SELECT (SELECT count(*) FROM like l WHERE d.id=l.defi) as nbLike, * FROM defi d WHERE masque=0 ORDER BY nbLike DESC; " +
-                      "SELECT (SELECT count(*) FROM like l WHERE d.id=l.defi) as nbLike, * FROM defi d WHERE d.masque=1 AND (d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like WHERE l.utilisateur=?)) ORDER BY nbLike DESC;"
+                (tri ? `SELECT * FROM defi WHERE masque=0 ORDER BY datedecreation DESC; 
+                        SELECT * FROM defi d WHERE d.masque=1 AND (d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like l WHERE l.utilisateur=?)) ORDER BY datedecreation DESC;`
+                    : `SELECT (SELECT count(*) FROM like l WHERE d.id=l.defi) as nbLike, * FROM defi d WHERE masque=0 ORDER BY nbLike DESC; 
+                        SELECT (SELECT count(*) FROM like l WHERE d.id=l.defi) as nbLike, * FROM defi d WHERE d.masque=1 AND (d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like l WHERE l.utilisateur=?)) ORDER BY nbLike DESC;`)
                 , [utilisateur.id, utilisateur.id],
                 (err, row) => {
                     if (err == null) {
@@ -86,7 +88,7 @@ module.exports = class DefiDao  {
     
     getArchives(id, done) {
         const defi = []
-        this.db.each("SELECT * FROM defi d LEFT JOIN defisauvegarde df on(d.id=df.defi) WHERE df.utilisateur=? ORDER BY d.datedecreation", [id],
+        this.db.each("SELECT d.* FROM defi d LEFT JOIN defisauvegarde df on(d.id=df.defi) WHERE df.utilisateur=? ORDER BY d.datedecreation", [id],
             (err, row) => {
                 if (err == null) {
                     let d = Object.assign(new Defi(), row)
