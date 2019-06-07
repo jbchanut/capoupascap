@@ -29,11 +29,10 @@ class CommentaireController   {
                                 <p class="card-text">${ligne.texte}</p>
                             </div>
                             <div class="col-2 h-100 border-left border-warning" style="text-align: center;">  
-                                ${this.utilisateur.id === ligne.utilisateur ? `
+                                ${((this.utilisateur != null) && (this.utilisateur.id === ligne.utilisateur)) ? `
                                     <button type="button" class="border-bottom border-warning btn" style="padding: 15%;" data-toggle="modal" data-target="#editCommentaire">
                                         <i class="far fa-edit" style="color: brown !important;"></i>
-                                    </button>` :
-                                        ``}   
+                                    </button>
                                 <button type="button" class="btn" style="padding: 15%;" onclick="
                                     servicesCommentaire.delete(${ligne.id}, (status) => {
                                         if(status === 200)  {
@@ -41,7 +40,8 @@ class CommentaireController   {
                                         }
                                     })">
                                     <i class="fas fa-minus" style="color: red !important;"></i>
-                                </button>                                                     
+                                </button>` :
+                                ``}                                                  
                             </div>
                         </div>
                     </div>`

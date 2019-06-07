@@ -35,7 +35,9 @@ module.exports = class UtilisateurDao  {
     getById(id, done) {
         let utilisateur = null
         this.db.each("SELECT * FROM utilisateur WHERE id = ?", [id],
-            (err, row) => { if (err == null) utilisateur = Object.assign(new Utilisateur(), row) },
+            (err, row) => { if (err == null)    {
+                utilisateur = Object.assign(new Utilisateur(), row)
+            }},
             () => { done(utilisateur) }
         )
     }
@@ -43,7 +45,9 @@ module.exports = class UtilisateurDao  {
     getByEmail(email, done) {
         let utilisateur = null
         this.db.each("SELECT * FROM utilisateur WHERE email = ?", [email],
-            (err, row) => { if (err == null) utilisateur = Object.assign(new Utilisateur(), row) },
+            (err, row) => { if (err == null)    {
+                utilisateur = Object.assign(new Utilisateur(), row)
+            }},
             () => { done(utilisateur) }
         )
     }

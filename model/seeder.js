@@ -10,10 +10,10 @@ module.exports = (utilisateurdao, commentairedao, likedao, defidao, defisauvegar
         (err) => {            
             if (err == null) {
                 utilisateurdao.db.serialize(() => {
-                    for (let i = 1; i < 10; i++) {
-                        utilisateurdao.insert(new Utilisateur(`${i}`, `${i}`, `${i}`, `${i}`, false, new Date())
-                            , () => {})
-                    }
+                    // for (let i = 1; i < 10; i++) {
+                    //     utilisateurdao.insert(new Utilisateur(`${i}`, `${i}`, `${i}`, `${i}`, false, new Date())
+                    //         , () => {})
+                    // }
                     done()
                 })
             }
@@ -33,12 +33,12 @@ module.exports = (utilisateurdao, commentairedao, likedao, defidao, defisauvegar
         " utilisateur INTEGER, texte TEXT, masque BOOLEAN, datedecreation INTEGER)",
         (err) => {
             if (err == null) {
-                defidao.db.serialize(() => {
-                    for (let i = 1; i < 10; i++) {
-                        defidao.insert(new Defi(`${i}`, `azdnoazdaznpdapipjpackkqsncklnqsklncklqsncknqskcnldzaidpjazzzodjpoazjdopazjcksnmnlsivhiqjgiejgkknvjndjkvizd
-                        `, false, new Date())
-                            , () => {})
-                    }
+                 defidao.db.serialize(() => {
+                //     for (let i = 1; i < 10; i++) {
+                //         defidao.insert(new Defi(`${i}`, `azdnoazdaznpdapipjpackkqsncklnqsklncklqsncknqskcnldzaidpjazzzodjpoazjdopazjcksnmnlsivhiqjgiejgkknvjndjkvizd
+                //         `, false, new Date())
+                //             , () => {})
+                //     }
                     done()
                 })
             }

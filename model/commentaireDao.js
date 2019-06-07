@@ -30,8 +30,9 @@ module.exports = class CommentaireDao  {
         this.db.each( "SELECT * FROM commentaire WHERE id = ?", [id],
             (err, row) => {
                 row.datedecreation ? row.datedecreation = true : row.datedecreation = false;
-                if (err == null) commentaire = Object.assign(new Commentaire(), row)
-            },
+                if (err == null)    {
+                    commentaire = Object.assign(new Commentaire(), row)
+            }},
             () => { done(personne) }
         )
     }
@@ -40,7 +41,7 @@ module.exports = class CommentaireDao  {
         const commentaire = []
         this.db.each("SELECT * FROM commentaire WHERE defi=? ORDER BY datedecreation DESC", [id],
             (err, row) => {
-                if (err == null) {
+                if (err == null)    {
                     let c = Object.assign(new Commentaire(), row)
                     commentaire.push(c)
                 }

@@ -12,8 +12,8 @@ module.exports = class DefiDao  {
     }
 
     update(id, defi, done)    {
-        const stmt = this.db.prepare( "UPDATE defi SET masque=? WHERE id=?" )
-        stmt.run(defi.masque, id, done)
+        const stmt = this.db.prepare( "UPDATE defi SET masque=?, texte=? WHERE id=?" )
+        stmt.run(defi.masque, defi.texte, id, done)
         stmt.finalize()
     }
 
@@ -29,10 +29,8 @@ module.exports = class DefiDao  {
         console.log(tri)
         if(utilisateur.filtrerealisation)   {
             this.db.each(
-                (tri ? `SELECT * FROM defi WHERE masque=0 ORDER BY datedecreation DESC; 
-                        SELECT * FROM defi d WHERE d.masque=1 AND (d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like l WHERE l.utilisateur=?)) ORDER BY datedecreation DESC;`
-                    : `SELECT (SELECT count(*) FROM like l WHERE d.id=l.defi) as nbLike, * FROM defi d WHERE masque=0 ORDER BY nbLike DESC; 
-                        SELECT (SELECT count(*) FROM like l WHERE d.id=l.defi) as nbLike, * FROM defi d WHERE d.masque=1 AND (d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like l WHERE l.utilisateur=?)) ORDER BY nbLike DESC;`)
+                (tri ? `SELECT d.* FROM defi d WHERE d.masque=0 OR ((d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like l WHERE l.utilisateur=?))) ORDER BY datedecreation DESC`
+                    : `SELECT (SELECT count(l.*) FROM like l WHERE d.id=l.defi) as nbLike, d.d* FROM defi d WHERE d.masque=0 OR d.masque=1 AND (d.utilisateur=? OR d.utilisateur=(SELECT l.utilisateur FROM like l WHERE l.utilisateur=?)) ORDER BY nbLike DESC`)
                 , [utilisateur.id, utilisateur.id],
                 (err, row) => {
                     if (err == null) {
@@ -105,7 +103,7 @@ module.exports = class DefiDao  {
 
     getByUtilisateurId(id, done) {
         const defi = []
-        this.db.each("SELECT * FROM defi WHERE utilisateur=? ORDER BY datedecreation", [id],
+        this.db.each("SELECT * FROM defi WHERE utilisateur=? AND masque=0 ORDER BY datedecreation", [id],
             (err, row) => {
                 if (err == null) {
                     let d = Object.assign(new Defi(), row)
@@ -124,8 +122,9 @@ module.exports = class DefiDao  {
         let defi = null
         this.db.each( "SELECT * FROM defi WHERE id = ?", [id],
             (err, row) => {
-                if (err == null) defi = Object.assign(new Defi(), row)
-            },
+                if (err == null)    {
+                    defi = Object.assign(new Defi(), row)
+            }},
             () => { done(defi) }
         )
     }
